@@ -1,0 +1,52 @@
+body{
+    font-size:16px;
+    margin-left: 30px;
+}
+
+.title{
+    width:400px;
+    font-size:24px;
+    color:#00CC66;
+    border-bottom: 3px solid #00CC66;
+    margin-bottom: 20px;
+}
+
+td{
+    width:500px;
+    height: 60px;
+    border-bottom: 3px solid #EEEEEE;
+}
+table .item{
+    width:100px;
+    height: 16px;
+    padding-left: 20px;
+    border-left: medium solid #00CC66;
+}
+.message{
+    color: #aaa;
+    font-size: 22px;
+    margin-top: 15px;
+}
+
+.del_btn{
+    font-size: 18px;
+    width:70px;
+    height:45px;
+    color:#FFFFFF;
+    text-align:center;
+    display:block;
+    padding:5px 0 5px;
+    background-color:#00CC66;
+    border-style: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.del_btn:link { color: #FFF; }
+.del_btn:visited { color: #FFF; }
+.del_btn:hover {
+     color: #FFF;
+     background-color:#00CC99;
+}
+.del_btn:active { color: #FFF; }
+

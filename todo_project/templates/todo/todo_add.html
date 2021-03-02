@@ -1,0 +1,29 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/addstyle.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <form action="{% url 'add' %}", method="POST">
+        {% csrf_token %}
+        <div class="title">{{title}}</div>
+        <div class="error">{{errormessage}}</div>
+        <table>
+        <tr><td class="item">日付</td></tr>
+        <tr><td>{{form.toki}}</td></tr>
+        <tr><td class="notes">入力例)1234/12/12,もしくはカレンダーアイコンから</td></tr>
+        <tr><td class="item">場所</td></tr>
+        <tr><td>{{form.basho}}</td></tr>
+        <tr><td class="notes">文字数は50文字以内で</td></tr>
+        <tr><td class="item">内容</td></tr>
+        <tr><td>{{form.naiyo}}</td></tr>
+        <tr><td class="notes">文字数は100文字以内で</td></tr>
+        </table>
+        <div class="message">{{message}}</div>
+        <input class="add_btn" type="submit" value="追加">
+    </form>
+</body>
+</html>

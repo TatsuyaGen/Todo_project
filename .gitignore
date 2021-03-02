@@ -1,0 +1,15 @@
+#django_sample内
+/django_sample/__pycache__/
+/django_sample/.env
+/django_sample/db.sqlite3
+
+#helloアプリ
+/hello/
+
+#static
+/static/admin/
+
+#todo内部
+/todo_project/__pycache__/
+/todo_project/migrations/__pycache__/
+

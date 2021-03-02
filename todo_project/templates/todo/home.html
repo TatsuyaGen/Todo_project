@@ -1,0 +1,67 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/homestyle.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <form action="{% url 'add' %}", method="POST">
+        {% csrf_token %}
+
+        <header>
+            <h1 class="theme">{{message}}</h1>
+            <ul class="list">
+                <li class="item" id="allcolor"><a href="{% url 'sort' 1 %}">全ての予定</a></li>
+                <li class="item" id="todaycolor"><a href="{% url 'sort' 2 %}">今日の予定</a></li>
+                <li class="item" id="weekcolor"><a href="{% url 'sort' 3 %}">今週の予定</a></li>
+                <li class="item" id="othercolor"><a href="{% url 'sort' 4 %}">来週以降の予定</a></li>
+            </ul>
+        </header>
+        <div class="add_page_options">
+            <div class="add_btn"><a href="{% url 'add' %}">予定の追加</a></div>
+            <div class="complete_btn"><a href="{% url 'completion_home' %}">完了タスク</a></div>
+            <div class="pagination">
+                {% if data.has_previous %}
+                    <div class="pagebtn"><a href="{% url 'home' %}">&laquo;最初へ</a></div><div class="pagebtn"><a href="{% url 'home' %}{{data.has_previous_page_number}}">&laquo;前へ</a></div>
+                {% endif %}
+                {% if data.has_next %}
+                <div class="pagebtn"><a href="{% url 'home' %}{{data.next_page_number}}">次へ&raquo;</a></div><div class="pagebtn"><a href="{% url 'home' %}{{data.paginator.num_pages}}">最後へ&raquo;</a></div>
+                {% endif %}
+            </div>
+        </div>
+        <table>
+            <tr>
+                <th class="Number">No</th>
+                <th class="toki">期限</th>
+                <th class="basho">場所</th>
+                <th class="naiyo">内容</th>
+                <th class="option"></th>
+                <th class="option"></th>
+                <th class="option"></th>
+            </tr>
+            {{test}}
+        {% for item in data %}
+            <tr>
+                <td class="Number">{{item.id}}</td>
+                {% if item.toki >= td_week %}
+                    <td class="toki">{{item.toki.year}}年{{item.toki.month}}月{{item.toki.day}}日<div class="mar">　</div></td>
+                {% elif item.toki < td_week and item.toki > td %}
+                    <td class="toki">{{item.toki.year}}年{{item.toki.month}}月{{item.toki.day}}日<div class="weeks">　</div></td>
+                {% elif item.toki == td%}
+                    <td class="toki">{{item.toki.year}}年{{item.toki.month}}月{{item.toki.day}}日<div class="days">　</div></td>
+                {% else %}
+                    <td class="toki">{{item.toki.year}}年{{item.toki.month}}月{{item.toki.day}}日<div class="par">　</div></td>
+                {% endif %}
+                <td class="basho">{{item.basho}}</td>
+                <td class="naiyo">{{item.naiyo}}</td>
+                <td class="option"><div class="up_btn"><a href="{% url 'updata' item.id %}">更新</a></div></td>
+                <td class="option"><div class="do_btn"><a href="{% url 'complete' item.id %}">完了</a></div></td>
+                <td class="option"><div class="del_btn"><a href="{% url 'delete' item.id %}">削除</a></div></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </form>
+</body>
+</html>

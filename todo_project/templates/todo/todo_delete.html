@@ -1,0 +1,22 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/deletestyle.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <form action="{% url 'delete' id %}", method="POST">
+        {% csrf_token %}
+        <div class="title">{{title}}</div>
+        <table>
+        <tr><td class="item">日付:</td><td><div class="formdata">{{data.toki.year}}年{{data.toki.month}}月{{data.toki.day}}日</div></td></tr>
+        <tr><td class="item">場所:</td><td><div class="formdata">{{data.basho}}</div></td></tr>
+        <tr><td class="item">内容:</td><td><div class="formdata">{{data.naiyo}}</div></td></tr>
+        </table>
+        <div class="message">{{message}}</div>
+        <input class="del_btn" type="submit" value="削除">
+    </form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'todo/css/completestyle.css' %}">
+    <title>{{title}}</title>
+</head>
+<body>
+    <form action="{% url 'complete' id %}", method="POST">
+        {% csrf_token %}
+        <div class="title">{{title}}</div>
+        <table>
+        <tr><td class="item">予定日:</td><td><div class="formdata">{{data.toki.year}}年{{data.toki.month}}月{{data.toki.day}}日</div></td></tr>
+        <tr><td class="item">完了日:</td><td><div class="formdata">{{kanryo_day.year}}年{{kanryo_day.month}}月{{kanryo_day.day}}日</div></td></tr>
+        <tr><td class="item">場所:</td><td><div class="formdata">{{data.basho}}</div></td></tr>
+        <tr><td class="item">内容:</td><td><div class="formdata">{{data.naiyo}}</div></td></tr>
+        </table>
+        <div class="message">{{message}}</div>
+        <input class="del_btn" type="submit" value="完了">
+    </form>
+</body>
+</html>
